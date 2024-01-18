@@ -5,11 +5,14 @@ import lk.ijse.dep11.app.entity.Student;
 import lk.ijse.dep11.app.repository.StudentRepo;
 import lk.ijse.dep11.app.util.VarList;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+
 
 
 @Service
@@ -42,9 +45,10 @@ public class StudentService {
     }
 
     // get Operation
-    public List<StudentDTO> getAllStudent(StudentDTO studentDTO){
-        
-        return null;
+    public List<StudentDTO> getAllStudents(){
+        List<Student> studentList = studentRepo.findAll();
+        return modelMapper.map(studentList, new TypeToken<ArrayList<StudentDTO>>(){
+        }.getType());
     }
 
     // delete operation

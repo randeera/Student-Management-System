@@ -80,7 +80,20 @@ public class StudentController {
     }
 
     @GetMapping
-    public ResponseEntity getAllStudent(){
-        return null;
+    public ResponseEntity getAllStudents(){
+        List<StudentDTO> studentDTOList = studentService.getAllStudents();
+        try {
+            responseDTO.setCode(VarList.RSP_SUCCESS);
+            responseDTO.setMessage("Success");
+            responseDTO.setContent(studentDTOList);
+            return new ResponseEntity(responseDTO, HttpStatus.OK);
+
+        } catch (Exception e) {
+            responseDTO.setCode((VarList.RSP_ERROR));
+            responseDTO.setMessage(e.getMessage());
+            responseDTO.setContent(null);
+            return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 }
