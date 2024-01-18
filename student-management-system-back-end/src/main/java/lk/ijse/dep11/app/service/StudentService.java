@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
 
 
 @Service
@@ -51,9 +51,24 @@ public class StudentService {
         }.getType());
     }
 
+    // search operation - get one student detail
+    public StudentDTO searchStudent(int studentId){
+        if(studentRepo.existsById(studentId)){
+            Student student = studentRepo.findById(studentId).orElse(null);
+            return modelMapper.map(student, StudentDTO.class);
+        }else {
+            return null;
+        }
+    }
+
     // delete operation
-    public String deleteStudent(StudentDTO studentDTO){
-        return null;
+    public String deleteStudent(int studentId){
+        if (studentRepo.existsById(studentId)){
+            studentRepo.deleteById(studentId);
+            return VarList.RSP_SUCCESS;
+        }else {
+            return VarList.RSP_NO_DATA_FOUND;
+        }
     }
 
 }

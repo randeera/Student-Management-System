@@ -94,6 +94,44 @@ public class StudentController {
             responseDTO.setContent(null);
             return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    @GetMapping(value = "/{studentId}")
+    public ResponseEntity searchStudent(@PathVariable int studentId){
+        StudentDTO studentDTO = studentService.searchStudent(studentId);
+        try {
+            responseDTO.setCode(VarList.RSP_SUCCESS);
+            responseDTO.setMessage("Success");
+            responseDTO.setContent(studentDTO);
+            return new ResponseEntity(responseDTO, HttpStatus.OK);
 
+        } catch (Exception e) {
+            responseDTO.setCode((VarList.RSP_ERROR));
+            responseDTO.setMessage(e.getMessage());
+            responseDTO.setContent(null);
+            return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @DeleteMapping(value = "/{studentId}")
+    public ResponseEntity deleteStudent(@PathVariable int studentId){
+        String res = studentService.deleteStudent(studentId);
+        try {
+            if(res.equals("00")){
+                responseDTO.setCode(VarList.RSP_SUCCESS);
+                responseDTO.setMessage("Deleted");
+                responseDTO.setContent(null);
+                return new ResponseEntity(responseDTO, HttpStatus.OK);
+            }else {
+                responseDTO.setCode(VarList.RSP_NO_DATA_FOUND);
+                responseDTO.setMessage("No Student available with this student id");
+                responseDTO.setContent(null);
+                return new ResponseEntity(responseDTO, HttpStatus.BAD_REQUEST);
+            }
+
+        } catch (Exception e) {
+            responseDTO.setCode((VarList.RSP_ERROR));
+            responseDTO.setMessage(e.getMessage());
+            responseDTO.setContent(null);
+            return new ResponseEntity(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
