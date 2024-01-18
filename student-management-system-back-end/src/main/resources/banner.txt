@@ -4,5 +4,5 @@
 .-'    | |  |  '  ''  '\ `-' \   --.|  ||  |  |  |   |  |   |  |.-'    |
 `-----'  `--'   `----'  `---' `----'`--''--'  `--'   `--'   `--'`-----'
 
-${Stdent Management System} ${v 1.0.0}
+${Student Management System} ${v 1.0.0}
 Powered by Kaveendra Randeera ${1.0.0}
