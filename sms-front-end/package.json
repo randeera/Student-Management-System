@@ -11,5 +11,8 @@
   "license": "ISC",
   "devDependencies": {
     "parcel": "^2.11.0"
+  },
+  "dependencies": {
+    "jquery": "^3.7.1"
   }
 }
