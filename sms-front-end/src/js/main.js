@@ -1,3 +1,4 @@
+getAllStudents();
 function saveStudent() {
     let name = $("#name-input").val();
     let address = $("#address-input").val();
@@ -16,6 +17,7 @@ function saveStudent() {
         }),
         success : function (data){
             alert("saved");
+            getAllStudents();
         },
         error : function (xhr, exception){
             alert('Error !');
@@ -42,6 +44,7 @@ function updateStudent() {
         }),
         success : function (data){
             alert("updated");
+            getAllStudents();
         },
         error : function (xhr, exception){
             alert('Error !');
@@ -56,7 +59,34 @@ function deleteStudent() {
         async : true,
         url : "http://localhost:8080/api/v1/students" + id,
         success : function (data){
-            alert("updated");
+            alert("Deleted");
+            getAllStudents();
+        },
+        error : function (xhr, exception){
+            alert('Error !');
+        }
+    });
+}
+
+function getAllStudents() {
+
+    $.ajax({
+        method : "GET",
+        async : true,
+        url : "http://localhost:8080/api/v1/students",
+        success : function (data){
+            if(data.code === "00") {
+                $("#table-body").empty();
+                for (const std of data.content) {
+                    let stdId = std.studentId;
+                    let stdName = std.studentName;
+                    let stdAddress = std.studentAddress;
+                    let stdMobile = std.mobileNumber;
+
+                    let row = `<tr><td>${stdId}</td><td>${stdName}</td><td>${stdAddress}</td><td>${stdMobile}</td></tr>`;
+                    $('#table-body').append(row);
+                }
+            }
         },
         error : function (xhr, exception){
             alert('Error !');
