@@ -18,6 +18,10 @@ function saveStudent() {
         success : function (data){
             alert("saved");
             getAllStudents();
+            $('#id-input').val('');
+            $('#name-input').val('');
+            $('#address-input').val('');
+            $('#mobile-input').val('');
         },
         error : function (xhr, exception){
             alert('Error !');
@@ -45,6 +49,10 @@ function updateStudent() {
         success : function (data){
             alert("updated");
             getAllStudents();
+            $('#id-input').val('');
+            $('#name-input').val('');
+            $('#address-input').val('');
+            $('#mobile-input').val('');
         },
         error : function (xhr, exception){
             alert('Error !');
@@ -57,10 +65,14 @@ function deleteStudent() {
     $.ajax({
         method : "DELETE",
         async : true,
-        url : "http://localhost:8080/api/v1/students" + id,
+        url : "http://localhost:8080/api/v1/students/" + id,
         success : function (data){
             alert("Deleted");
             getAllStudents();
+            $('#id-input').val('');
+            $('#name-input').val('');
+            $('#address-input').val('');
+            $('#mobile-input').val('');
         },
         error : function (xhr, exception){
             alert('Error !');
@@ -93,4 +105,18 @@ function getAllStudents() {
         }
     });
 }
+
+$(document).ready(function (){
+    $(document).on('click', '#table-body tr', function (){
+        let col0 = $(this).find('td:eq(0)').text();
+        let col1 = $(this).find('td:eq(1)').text();
+        let col2 = $(this).find('td:eq(2)').text();
+        let col3 = $(this).find('td:eq(3)').text();
+
+        $('#id-input').val(col0);
+        $('#name-input').val(col1);
+        $('#address-input').val(col2);
+        $('#mobile-input').val(col3);
+    })
+});
 
