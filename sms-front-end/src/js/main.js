@@ -49,3 +49,18 @@ function updateStudent() {
     });
 }
 
+function deleteStudent() {
+    let id = $("#id-input").val();
+    $.ajax({
+        method : "DELETE",
+        async : true,
+        url : "http://localhost:8080/api/v1/students" + id,
+        success : function (data){
+            alert("updated");
+        },
+        error : function (xhr, exception){
+            alert('Error !');
+        }
+    });
+}
+
