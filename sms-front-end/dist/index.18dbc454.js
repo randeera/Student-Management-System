@@ -579,14 +579,22 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 }
 
 },{}],"1SICI":[function(require,module,exports) {
-const saveStudent = ()=>{
-    let name = $("name-input").val();
-    let address = $("address-input").val();
-    let mobile = $("mobile-input").val();
-    $.ajax({
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "saveStudent", ()=>saveStudent);
+var _jquery = require("jquery");
+var _jqueryDefault = parcelHelpers.interopDefault(_jquery);
+function saveStudent() {
+    let name = (0, _jqueryDefault.default)("#name-input").val();
+    let address = (0, _jqueryDefault.default)("#address-input").val();
+    let mobile = (0, _jqueryDefault.default)("#mobile-input").val();
+    (0, _jqueryDefault.default).ajax({
         method: "POST",
-        contentType: "application/json",
         url: "http://localhost:8080/api/v1/students",
+        async: true,
+        headers: {
+            contentType: "application/json"
+        },
         data: JSON.stringify({
             "studentId": "",
             "studentName": name,
@@ -596,10 +604,12 @@ const saveStudent = ()=>{
         success: function(data) {
             alert("saved !");
         },
-        error: function(xhr) {}
+        error: function(xhr, exception) {
+            alert("Error !");
+        }
     });
-};
+}
 
-},{}]},["lv1zm","1SICI"], "1SICI", "parcelRequire8fc5")
+},{"jquery":"bLHNJ","@parcel/transformer-js/src/esmodule-helpers.js":"b3YDz"}]},["lv1zm","1SICI"], "1SICI", "parcelRequire8fc5")
 
 //# sourceMappingURL=index.18dbc454.js.map

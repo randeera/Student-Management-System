@@ -1,0 +1,1 @@
+{"mappings":"AAAA,SAAS;IACL,MAAM;AACV","sources":["src/js/main.js"],"sourcesContent":["function saveStudent() {\n    alert('ok');\n}"],"names":[],"version":3,"file":"index.aa69868b.js.map","sourceRoot":"/__parcel_source_root/"}
